@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migug - VTuber & Digital Art</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://lib.youware.com/youware-lib-editor.1752562065.js" id="yourware-lib"></script><script src="https://lib.youware.com/youware-lib-consumer.1752562065.js" id="yourware-lib"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                        secondary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary-600 dark:text-primary-400">Migug</a>
+            
+            <div class="flex items-center space-x-4">
+                <!-- Search Bar (Desktop) -->
+                <div class="relative hidden md:block">
+                    <input type="text" id="searchInput" placeholder="Buscar produtos..." 
+                        class="pl-10 pr-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block text-yellow-300"></i>
+                </button>
+                
+                <!-- Cart Button -->
+                <button id="cartBtn" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 relative transition">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-primary-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                
+                <!-- Admin Menu -->
+                <div class="relative">
+                    <button id="adminMenuBtn" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                        <i class="fas fa-user-shield" id="adminIcon"></i>
+                    </button>
+                    <div id="adminDropdown" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 hidden z-50">
+                        <div id="adminMenuItems">
+                            <button id="adminLoginBtn" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center transition">
+                                <i class="fas fa-sign-in-alt mr-2"></i>
+                                Login Admin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-16 bg-gradient-to-r from-primary-500 to-primary-700 text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Arte Digital para Streamers</h1>
+                    <p class="text-lg mb-6">Modelos VTuber de alta qualidade, PNGTubers, ícones e websites personalizados para seus projetos.</p>
+                    <a href="#services" class="bg-white text-primary-700 hover:bg-gray-100 px-6 py-3 rounded-full font-bold inline-block transition">Ver Serviços</a>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="bg-white p-4 rounded-lg shadow-lg transform rotate-3 animate-float">
+                        <img src="https://i.imgur.com/IVvlENx.gif" alt="VTuber Model" class="rounded w-full max-w-md" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Produtos Destaque</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition hover-lift">
+                    <img src="https://i.imgur.com/4AqDx0r.gif" alt="VTuber Model" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Modelo VTuber</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Modelo semi-profissional com 2 ou mais expressões</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-600 dark:text-primary-400">R$ 90</span>
+                            <button class="add-to-cart-btn bg-primary-600 text-white px-4 py-2 rounded-full hover:bg-primary-700 transition" data-product="vtuber">
+                                <i class="fas fa-cart-plus mr-2"></i>Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition hover-lift">
+                    <img src="https://i.imgur.com/jST8YL3.jpeg" alt="PNGTuber" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">PNGTuber</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Set completo com 8 expressões</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-600 dark:text-primary-400">R$ 40</span>
+                            <button class="add-to-cart-btn bg-primary-600 text-white px-4 py-2 rounded-full hover:bg-primary-700 transition" data-product="pngtuber">
+                                <i class="fas fa-cart-plus mr-2"></i>Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition hover-lift">
+                    <img src="https://i.imgur.com/RGCufrM.png" alt="Icons" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Ícones</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Ícones personalizados para stream</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-600 dark:text-primary-400">R$ 5 cada</span>
+                            <button class="add-to-cart-btn bg-primary-600 text-white px-4 py-2 rounded-full hover:bg-primary-700 transition" data-product="icons">
+                                <i class="fas fa-cart-plus mr-2"></i>Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition hover-lift">
+                    <img src="https://i.imgur.com/VZE1bCe.png" alt="Overlays" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">Overlays para stream</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Pacotes completos para stream</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-primary-600 dark:text-primary-400">R$ 30 - R$ 100</span>
+                            <button class="add-to-cart-btn bg-primary-600 text-white px-4 py-2 rounded-full hover:bg-primary-700 transition" data-product="overlays">
+                                <i class="fas fa-cart-plus mr-2"></i>Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Nossos Serviços</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="productsGrid">
+                <!-- Product cards will be dynamically populated here -->
+                <div class="products-loading">
+                    <div class="loading-spinner"></div>
+                    <span class="ml-2">Carregando produtos...</span>
+                </div>
+            </div>
+            
+            <!-- Vendor Section -->
+            <div class="text-center mt-12 pt-8 border-t border-gray-300 dark:border-gray-600">
+                <h3 class="text-xl font-bold mb-4">Quer vender seus produtos digitais?</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">Junte-se à nossa plataforma e venda seus VTubers, PNGTubers e artes digitais</p>
+                <a href="https://forms.gle/vendor-signup" target="_blank" 
+                   class="bg-secondary-600 hover:bg-secondary-700 text-white px-8 py-3 rounded-full font-bold inline-flex items-center transition transform hover:scale-105">
+                    <i class="fas fa-store mr-2"></i>
+                    Também quero vender
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorial Section -->
+    <section id="tutorial" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Como Funciona</h2>
+            
+            <!-- Tutorial Steps -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="text-center">
+                    <div class="bg-primary-100 dark:bg-primary-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-search text-primary-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">1. Escolha seu produto</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Navegue pelos nossos produtos e escolha o que melhor se adequa ao seu projeto</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-primary-100 dark:bg-primary-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-paint-brush text-primary-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">2. Personalize</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Forneça detalhes específicos, referências e características desejadas</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-primary-100 dark:bg-primary-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-download text-primary-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">3. Receba</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Após o pagamento, receba seus arquivos em até 7 dias úteis</p>
+                </div>
+            </div>
+
+            <!-- VTuber vs PNGTuber Guide -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                <h3 class="text-2xl font-bold text-center mb-8">VTuber vs PNGTuber: Qual escolher?</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- VTuber -->
+                    <div class="border border-primary-200 dark:border-primary-800 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.imgur.com/4AqDx0r.gif" alt="VTuber Example" class="w-16 h-16 rounded-lg object-cover mr-4">
+                            <div>
+                                <h4 class="text-xl font-bold text-primary-600">VTuber Model</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Modelo 3D/2D com rigging</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <p class="text-sm">Movimentação fluida e natural</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <p class="text-sm">Múltiplas expressões e poses</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <p class="text-sm">Compatível com software de tracking</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <p class="text-sm">Ideal para streams longas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-primary-50 dark:bg-primary-900 p-4 rounded-lg">
+                            <p class="text-sm font-medium text-primary-700 dark:text-primary-300">
+                                <i class="fas fa-lightbulb mr-2"></i>
+                                Perfeito para quem quer uma experiência imersiva e profissional
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- PNGTuber -->
+                    <div class="border border-secondary-200 dark:border-secondary-800 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.imgur.com/jST8YL3.jpeg" alt="PNGTuber Example" class="w-16 h-16 rounded-lg object-cover mr-4">
+                            <div>
+                                <h4 class="text-xl font-bold text-secondary-600">PNGTuber</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Imagens estáticas com transições</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <p class="text-sm">Fácil de configurar e usar</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <p class="text-sm">Baixo consumo de recursos</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <p class="text-sm">Múltiplas expressões (8+ poses)</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <p class="text-sm">Custo-benefício excelente</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-secondary-50 dark:bg-secondary-900 p-4 rounded-lg">
+                            <p class="text-sm font-medium text-secondary-700 dark:text-secondary-300">
+                                <i class="fas fa-lightbulb mr-2"></i>
+                                Ideal para iniciantes ou quem quer algo simples e eficaz
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comparison Table -->
+                <div class="mt-8 overflow-x-auto">
+                    <table class="w-full bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <thead class="bg-gray-200 dark:bg-gray-600">
+                            <tr>
+                                <th class="p-3 text-left">Característica</th>
+                                <th class="p-3 text-center">VTuber</th>
+                                <th class="p-3 text-center">PNGTuber</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                            <tr>
+                                <td class="p-3">Preço</td>
+                                <td class="p-3 text-center">R$ 90 - R$ 150</td>
+                                <td class="p-3 text-center">R$ 40 - R$ 80</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">Complexidade</td>
+                                <td class="p-3 text-center">Alta</td>
+                                <td class="p-3 text-center">Baixa</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">Tempo de entrega</td>
+                                <td class="p-3 text-center">5-7 dias</td>
+                                <td class="p-3 text-center">2-3 dias</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">Recursos necessários</td>
+                                <td class="p-3 text-center">Alto</td>
+                                <td class="p-3 text-center">Baixo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Sobre Nós</h2>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <img src="https://i.imgur.com/placeholder-about.jpg" alt="About Us" class="rounded-lg shadow-lg" loading="lazy">
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <h3 class="text-2xl font-bold mb-4">Criando arte digital desde 2024</h3>
+                    <p class="mb-4">Sou um V-artist iniciante e desenvolvedor apaixonado por criar conteúdo digital para streamers e criadores de conteúdo.</p>
+                    <p class="mb-4">Minha missão é fornecer arte digital acessível para ajudar os criadores a se destacarem em suas plataformas.</p>
+                    <p class="mb-6">Todos os nossos produtos são criados com atenção aos detalhes e personalizados de acordo com as necessidades de cada cliente.</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg">
+                            <i class="fas fa-palette text-primary-600 text-xl mb-2"></i>
+                            <p class="text-sm font-medium">Design Original</p>
+                        </div>
+                        <div class="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg">
+                            <i class="fas fa-clock text-primary-600 text-xl mb-2"></i>
+                            <p class="text-sm font-medium">Entrega Rápida</p>
+                        </div>
+                        <div class="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg">
+                            <i class="fas fa-headset text-primary-600 text-xl mb-2"></i>
+                            <p class="text-sm font-medium">Suporte 24/7</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Migug</h3>
+                    <p class="mb-4">Arte digital de qualidade para streamers e criadores de conteúdo.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-primary-400 transition"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-white hover:text-primary-400 transition"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-white hover:text-primary-400 transition"><i class="fab fa-twitch text-xl"></i></a>
+                        <a href="#" class="text-white hover:text-primary-400 transition"><i class="fab fa-discord text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary-400 transition">Início</a></li>
+                        <li><a href="#services" class="hover:text-primary-400 transition">Serviços</a></li>
+                        <li><a href="#tutorial" class="hover:text-primary-400 transition">Tutorial</a></li>
+                        <li><a href="#about" class="hover:text-primary-400 transition">Sobre</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition">Portfolio</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contato</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2 text-primary-400"></i> contato@migug.com</li>
+                        <li class="flex items-center"><i class="fab fa-discord mr-2 text-primary-400"></i> Migug#1234</li>
+                        <li class="flex items-center"><i class="fab fa-instagram mr-2 text-primary-400"></i> @migug.art</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Migug. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Include all modals and components -->
+    <div id="modals-container">
+        <!-- Shopping Cart Drawer -->
+        <div id="cartDrawer" class="fixed top-0 right-0 w-full md:w-96 h-full bg-white dark:bg-gray-800 shadow-lg z-50 transform translate-x-full cart-drawer">
+            <div class="p-6 h-full flex flex-col">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Seu Carrinho</h2>
+                    <button id="closeCartBtn" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div id="cartItems" class="flex-grow overflow-y-auto mb-6">
+                    <div class="text-center text-gray-500 dark:text-gray-400 py-8" id="emptyCartMessage">
+                        <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                        <p>Seu carrinho está vazio</p>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+                    <div class="flex justify-between text-lg font-bold mb-4">
+                        <span>Total:</span>
+                        <span id="cartTotal">R$ 0</span>
+                    </div>
+                    
+                    <button id="checkoutBtn" class="bg-primary-600 text-white w-full py-3 rounded-lg hover:bg-primary-700 transition flex items-center justify-center">
+                        <i class="fas fa-credit-card mr-2"></i>
+                        <span>Finalizar Compra</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Bot Widget -->
+        <div id="chatWidget" class="fixed bottom-4 right-4 z-50">
+            <!-- Chat Button -->
+            <button id="chatToggle" class="bg-primary-600 hover:bg-primary-700 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition transform hover:scale-105">
+                <i class="fas fa-comments text-xl"></i>
+            </button>
+            
+            <!-- Chat Window -->
+            <div id="chatWindow" class="absolute bottom-16 right-0 w-80 h-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 transform scale-0 origin-bottom-right transition-transform duration-200">
+                <!-- Chat Header -->
+                <div class="bg-primary-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-robot text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Assistente Migug</h3>
+                            <p class="text-xs opacity-90">Assistente Virtual</p>
+                        </div>
+                    </div>
+                    <button id="chatClose" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Chat Messages -->
+                <div id="chatMessages" class="flex-1 p-4 h-64 overflow-y-auto bg-gray-50 dark:bg-gray-900">
+                    <div class="chat-message bot-message mb-3">
+                        <div class="bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm">
+                            <p class="text-sm">Olá! 👋 Sou o assistente da Migug. Como posso ajudar você hoje?</p>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">Agora</div>
+                    </div>
+                </div>
+                
+                <!-- Chat Input -->
+                <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="chatInput" placeholder="Digite sua mensagem..." 
+                               class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm">
+                        <button id="chatSend" class="bg-primary-600 hover:bg-primary-700 text-white p-2 rounded-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap gap-1 mt-2">
+                        <button class="quick-reply bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs hover:bg-gray-300 dark:hover:bg-gray-600 transition" data-message="Quanto custa um VTuber?">
+                            💰 Preços
+                        </button>
+                        <button class="quick-reply bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs hover:bg-gray-300 dark:hover:bg-gray-600 transition" data-message="Qual a diferença entre VTuber e PNGTuber?">
+                            🤔 Diferenças
+                        </button>
+                        <button class="quick-reply bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs hover:bg-gray-300 dark:hover:bg-gray-600 transition" data-message="Como faço um pedido?">
+                            📋 Como pedir
+                        </button>
+                        <button class="quick-reply bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs hover:bg-gray-300 dark:hover:bg-gray-600 transition" data-message="Aqui é confiável?">
+                            🔒 É confiável?
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkout Modal -->
+        <div id="checkoutModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+            <div class="modal-backdrop absolute inset-0 opacity-0"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg max-w-2xl w-full relative transform scale-95 opacity-0 transition-all duration-300" id="checkoutModalContent">
+                    <button id="closeCheckoutModalBtn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                    
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-6">Finalizar Compra</h2>
+                        
+                        <!-- Order Summary -->
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                            <h3 class="font-bold text-lg mb-4">Resumo do Pedido</h3>
+                            <div id="checkoutItems" class="space-y-3">
+                                <!-- Items will be populated here -->
+                            </div>
+                            <div class="border-t border-gray-200 dark:border-gray-600 mt-4 pt-4">
+                                <div class="flex justify-between font-bold text-lg">
+                                    <span>Total:</span>
+                                    <span id="checkoutTotal">R$ 0</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Customer Information Form -->
+                        <form id="checkoutForm" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="firstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Nome *
+                                    </label>
+                                    <input type="text" id="firstName" name="firstName" required
+                                        class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                </div>
+                                <div>
+                                    <label for="lastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Sobrenome *
+                                    </label>
+                                    <input type="text" id="lastName" name="lastName" required
+                                        class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Email *
+                                </label>
+                                <input type="email" id="email" name="email" required
+                                    class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Telefone (WhatsApp)
+                                </label>
+                                <input type="tel" id="phone" name="phone"
+                                    class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                    placeholder="+55 (11) 99999-9999">
+                            </div>
+                            
+                            <div>
+                                <label for="notes" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Observações Especiais *
+                                </label>
+                                <textarea id="notes" name="notes" rows="3" required minlength="20"
+                                    class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                    placeholder="Descreva detalhes específicos para seus produtos personalizados... (mínimo 20 caracteres)"></textarea>
+                                <div class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                    <span id="notesCount">0</span>/20 caracteres mínimos
+                                </div>
+                            </div>
+                            
+                            <!-- Payment Method -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Método de Pagamento *
+                                </label>
+                                <div class="bg-green-50 dark:bg-green-900 p-4 rounded-lg border border-green-200 dark:border-green-700">
+                                    <div class="flex items-center mb-3">
+                                        <i class="fas fa-qrcode text-green-600 dark:text-green-400 mr-3 text-xl"></i>
+                                        <div>
+                                            <h4 class="font-bold text-green-800 dark:text-green-200">PIX - Pagamento Instantâneo</h4>
+                                            <p class="text-green-700 dark:text-green-300 text-sm">Único método de pagamento aceito</p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white dark:bg-gray-800 p-3 rounded border">
+                                        <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Chave PIX:</p>
+                                        <div class="flex items-center space-x-2">
+                                            <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm font-mono">f4a6ea95-6c02-4903-bc4a-d6c94a92eb76</code>
+                                            <button type="button" onclick="copyPixKey()" class="text-primary-600 hover:text-primary-700">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Coupon Code -->
+                            <div>
+                                <label for="couponCode" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Cupom de Desconto (Opcional)
+                                </label>
+                                <div class="flex space-x-2">
+                                    <input type="text" id="couponCode" name="couponCode"
+                                        class="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                        placeholder="Digite seu cupom">
+                                    <button type="button" id="applyCouponBtn"
+                                        class="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition">
+                                        Aplicar
+                                    </button>
+                                </div>
+                                <div id="couponMessage" class="mt-1 text-sm hidden"></div>
+                            </div>
+                            
+                            <!-- Product Characteristics -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Características dos Produtos *
+                                </label>
+                                <div id="productCharacteristics" class="space-y-3">
+                                    <!-- Will be populated dynamically -->
+                                </div>
+                            </div>
+                            
+                            <!-- Receipt Upload -->
+                            <div>
+                                <label for="receiptUpload" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Comprovante de Pagamento *
+                                </label>
+                                <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4">
+                                    <input type="file" id="receiptUpload" name="receiptUpload" accept="image/*,.pdf" required
+                                        class="hidden">
+                                    <div class="text-center" id="uploadArea">
+                                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                                        <p class="text-gray-600 dark:text-gray-400">Clique para enviar o comprovante</p>
+                                        <p class="text-xs text-gray-500 mt-1">PNG, JPG ou PDF (máx. 5MB)</p>
+                                    </div>
+                                    <div id="uploadedFile" class="hidden">
+                                        <div class="flex items-center justify-between bg-green-50 dark:bg-green-900 p-2 rounded">
+                                            <div class="flex items-center">
+                                                <i class="fas fa-file-image text-green-600 mr-2"></i>
+                                                <span id="fileName" class="text-sm text-green-700 dark:text-green-300"></span>
+                                            </div>
+                                            <button type="button" onclick="removeFile()" class="text-red-500 hover:text-red-700">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <input type="checkbox" id="terms" name="terms" required
+                                    class="text-primary-600 focus:ring-primary-500">
+                                <label for="terms" class="ml-2 text-sm text-gray-600 dark:text-gray-400">
+                                    Concordo com os <a href="https://termosdeservicomigug.tiiny.site" class="text-primary-600 hover:underline" target="_blank" rel="noopener noreferrer">termos de serviço</a> *
+                                </label>
+                            </div>
+                            
+                            <div class="flex space-x-4 pt-4">
+                                <button type="button" id="cancelCheckoutBtn" 
+                                    class="flex-1 bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-white py-3 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition">
+                                    Cancelar
+                                </button>
+                                <button type="submit" 
+                                    class="flex-1 bg-primary-600 text-white py-3 rounded-lg hover:bg-primary-700 transition flex items-center justify-center">
+                                    <i class="fas fa-credit-card mr-2"></i>
+                                    Confirmar Pedido
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+            <div class="modal-backdrop absolute inset-0 opacity-0"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg max-w-md w-full relative transform scale-95 opacity-0 transition-all duration-300" id="successModalContent">
+                    <div class="p-6 text-center">
+                        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 mb-4">
+                            <i class="fas fa-check text-green-600 dark:text-green-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Pedido Confirmado!</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4" id="orderSuccessMessage">
+                            Seu pedido foi recebido com sucesso. Entraremos em contato em breve!
+                        </p>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Número do Pedido:</p>
+                            <p class="text-lg font-bold text-primary-600 dark:text-primary-400" id="orderNumber">#12345</p>
+                        </div>
+                        <button id="closeSuccessModalBtn" 
+                            class="w-full bg-primary-600 text-white py-2 rounded-lg hover:bg-primary-700 transition">
+                            Fechar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Detail Modal -->
+        <div id="productModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+            <div class="modal-backdrop absolute inset-0 opacity-0"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg max-w-4xl w-full relative transform scale-95 opacity-0 transition-all duration-300" id="modalContent">
+                    <!-- Modal content will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Login Modal -->
+        <div id="adminLoginModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+            <div class="modal-backdrop absolute inset-0 opacity-0"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg max-w-md w-full relative transform scale-95 opacity-0 transition-all duration-300" id="adminLoginContent">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold">Login Administrativo</h2>
+                            <button id="closeAdminLoginBtn" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                <i class="fas fa-times text-xl"></i>
+                            </button>
+                        </div>
+                        
+                        <form id="adminLoginForm" class="space-y-4">
+                            <div>
+                                <label for="adminEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Email
+                                </label>
+                                <input type="email" id="adminEmail" required
+                                    class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            </div>
+                            
+                            <div>
+                                <label for="adminPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Senha
+                                </label>
+                                <input type="password" id="adminPassword" required
+                                    class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            </div>
+                            
+                            <div id="adminLoginError" class="hidden text-red-600 text-sm"></div>
+                            
+                            <button type="submit" 
+                                class="w-full bg-primary-600 text-white py-3 rounded-lg hover:bg-primary-700 transition">
+                                Entrar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="adminPanel" class="fixed inset-0 z-50 overflow-y-auto hidden">
+            <div class="modal-backdrop absolute inset-0 opacity-0"></div>
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg max-w-6xl w-full relative transform scale-95 opacity-0 transition-all duration-300" id="adminPanelContent">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold">Painel Administrativo</h2>
+                                <p class="text-sm text-gray-500 dark:text-gray-400" id="adminWelcome">Bem-vindo, Administrador</p>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <button id="exportDataBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                    <i class="fas fa-download mr-2"></i>
+                                    Exportar Dados
+                                </button>
+                                <button id="logoutAdminBtn" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>
+                                    Sair
+                                </button>
+                                <button id="closeAdminPanelBtn" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                    <i class="fas fa-times text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Stats -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                            <div class="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-blue-800 dark:text-blue-200">Total Pedidos</h3>
+                                        <p class="text-2xl font-bold text-blue-600 dark:text-blue-400" id="totalOrders">0</p>
+                                    </div>
+                                    <i class="fas fa-shopping-cart text-blue-600 dark:text-blue-400 text-2xl"></i>
+                                </div>
+                            </div>
+                            <div class="bg-green-50 dark:bg-green-900 p-4 rounded-lg">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-green-800 dark:text-green-200">Vendas Hoje</h3>
+                                        <p class="text-2xl font-bold text-green-600 dark:text-green-400" id="todaySales">R$ 0</p>
+                                    </div>
+                                    <i class="fas fa-dollar-sign text-green-600 dark:text-green-400 text-2xl"></i>
+                                </div>
+                            </div>
+                            <div class="bg-purple-50 dark:bg-purple-900 p-4 rounded-lg">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-purple-800 dark:text-purple-200">Produto Top</h3>
+                                        <p class="text-lg font-bold text-purple-600 dark:text-purple-400" id="topProduct">-</p>
+                                    </div>
+                                    <i class="fas fa-star text-purple-600 dark:text-purple-400 text-2xl"></i>
+                                </div>
+                            </div>
+                            <div class="bg-orange-50 dark:bg-orange-900 p-4 rounded-lg">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-orange-800 dark:text-orange-200">Média por Pedido</h3>
+                                        <p class="text-2xl font-bold text-orange-600 dark:text-orange-400" id="avgOrderValue">R$ 0</p>
+                                    </div>
+                                    <i class="fas fa-chart-line text-orange-600 dark:text-orange-400 text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Filters and Actions -->
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <input type="text" id="searchOrders" placeholder="Buscar pedidos..." 
+                                class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            <select id="filterStatus" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                <option value="">Todos os Status</option>
+                                <option value="pending">Pendente</option>
+                                <option value="processing">Processando</option>
+                                <option value="completed">Concluído</option>
+                                <option value="cancelled">Cancelado</option>
+                            </select>
+                            <input type="date" id="filterDate" 
+                                class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                            <button id="clearFilters" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">
+                                <i class="fas fa-eraser mr-2"></i>
+                                Limpar
+                            </button>
+                        </div>
+                        
+                        <!-- Orders Table -->
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-bold text-lg">Pedidos Recentes</h3>
+                                <div class="flex space-x-2">
+                                    <button id="refreshData" class="bg-primary-600 text-white px-3 py-1 rounded text-sm hover:bg-primary-700 transition">
+                                        <i class="fas fa-sync-alt mr-1"></i>
+                                        Atualizar
+                                    </button>
+                                    <button id="markAllRead" class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700 transition">
+                                        <i class="fas fa-check-double mr-1"></i>
+                                        Marcar Todos
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr class="border-b border-gray-200 dark:border-gray-600">
+                                            <th class="text-left py-2 px-2">
+                                                <input type="checkbox" id="selectAll" class="rounded">
+                                            </th>
+                                            <th class="text-left py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onclick="sortOrders('orderNumber')">
+                                                Pedido <i class="fas fa-sort text-gray-400"></i>
+                                            </th>
+                                            <th class="text-left py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onclick="sortOrders('customer')">
+                                                Cliente <i class="fas fa-sort text-gray-400"></i>
+                                            </th>
+                                            <th class="text-left py-2">Email</th>
+                                            <th class="text-left py-2">Produtos</th>
+                                            <th class="text-left py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onclick="sortOrders('total')">
+                                                Total <i class="fas fa-sort text-gray-400"></i>
+                                            </th>
+                                            <th class="text-left py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onclick="sortOrders('date')">
+                                                Data <i class="fas fa-sort text-gray-400"></i>
+                                            </th>
+                                            <th class="text-left py-2">Status</th>
+                                            <th class="text-left py-2">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ordersTableBody">
+                                        <tr>
+                                            <td colspan="9" class="text-center py-8 text-gray-500 dark:text-gray-400">
+                                                <div class="flex flex-col items-center">
+                                                    <i class="fas fa-inbox text-4xl mb-2"></i>
+                                                    <p>Nenhum pedido encontrado.</p>
+                                                    <p class="text-sm mt-2">Pedidos aparecerão aqui conforme forem sendo realizados.</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <div class="flex justify-between items-center mt-4" id="pagination">
+                                <div class="text-sm text-gray-500">
+                                    Mostrando <span id="showingFrom">0</span> - <span id="showingTo">0</span> de <span id="totalResults">0</span> resultados
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button id="prevPage" class="px-3 py-1 bg-gray-200 dark:bg-gray-600 rounded text-sm hover:bg-gray-300 dark:hover:bg-gray-500 transition" disabled>
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <span id="currentPage" class="px-3 py-1 bg-primary-600 text-white rounded text-sm">1</span>
+                                    <button id="nextPage" class="px-3 py-1 bg-gray-200 dark:bg-gray-600 rounded text-sm hover:bg-gray-300 dark:hover:bg-gray-500 transition" disabled>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Order Detail Modal within Admin Panel -->
+                        <div id="orderDetailModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+                            <div class="flex items-center justify-center min-h-screen p-4">
+                                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg max-w-4xl w-full max-h-96 overflow-y-auto">
+                                    <div class="p-6" id="orderDetailContent">
+                                        <!-- Order details will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    
+    <!-- Additional inline script for immediate initialization -->
+    <script>
+        // Prevent FOUC (Flash of Unstyled Content)
+        document.documentElement.style.visibility = 'visible';
+        
+        // Service Worker for offline capability (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(error => console.log('SW registration failed'));
+            });
+        }
+    </script>
+</body>
+</html>
